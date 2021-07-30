@@ -7,6 +7,11 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import com.pattexpattex.servergods.commands.*;
+import com.pattexpattex.servergods.commands.status.MaintenanceCommand;
+import com.pattexpattex.servergods.commands.status.OfflineCommand;
+import com.pattexpattex.servergods.commands.status.OnlineCommand;
+import com.pattexpattex.servergods.commands.status.RestartCommand;
+import com.pattexpattex.servergods.BotCommand;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -23,6 +28,10 @@ public class CommandListener extends ListenerAdapter {
 		this.prefix = prefix;
 		commands.put("ping", new PingCommand());
 		commands.put("help", new HelpCommand(Collections.unmodifiableMap(commands)));
+		commands.put("offline", new OfflineCommand());
+		commands.put("online", new OnlineCommand());
+		commands.put("maintenance", new MaintenanceCommand());
+		commands.put("restarting", new RestartCommand());
 	}
 	
 	@Override

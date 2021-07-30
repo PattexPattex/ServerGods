@@ -28,6 +28,7 @@ public class Main {
 	private static Logger LOG=LoggerFactory.getLogger(Main.class);
 
 	public static final Color color = new Color(84, 130, 53);
+	public static final String pfp = "https://cdn.discordapp.com/avatars/840904349478682624/b74c2c359604034628c226d26b6f1e14.webp?size=256";
 	
 	public static void main(String[] args) {
 		try {
