@@ -1,11 +1,10 @@
 package com.pattexpattex.servergods.commands.status;
 
-import java.time.OffsetDateTime;
-
 import com.pattexpattex.servergods.BotCommand;
-import com.pattexpattex.servergods.Main;
+import com.pattexpattex.servergods.util.MessageUtils;
 
-import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.VoiceChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
@@ -13,16 +12,14 @@ public class MaintenanceCommand implements BotCommand {
 
     @Override
     public void run(GuildMessageReceivedEvent event, String[] args) {
-        EmbedBuilder eb = new EmbedBuilder();
-        VoiceChannel channel = event.getGuild().getVoiceChannelById("840836187815280640");
-    
-        eb.appendDescription("Changed the status name to **:orange_circle: Maintenance**")
-        .setColor(Main.color)
-        .setTimestamp(OffsetDateTime.now())
-        .setFooter("Powered by Server Gods.", Main.pfp);
+        Role player = event.getGuild().getRoleById("819604897363918949");
+        TextChannel textChannel = event.getGuild().getTextChannelById("819579501327417365");
+        VoiceChannel voiceChannel = event.getGuild().getVoiceChannelById("840836187815280640");
    
-        channel.getManager().setName("🟠 Maintenance").queue();
-        event.getMessage().reply(eb.build()).queue();
+        MessageUtils.rolePing(player, textChannel);
+        voiceChannel.getManager().setName("🟠 Maintenance").queue();
+        textChannel.sendMessage(MessageUtils.defaultEmbed(null, "The server is now on **:orange_circle: Maintenance**, it should be back soon:tm:.", false).build()).queue();
+        event.getMessage().reply(MessageUtils.defaultEmbed(null, "Changed the status name to **:orange_circle: Maintenance**", false).build()).queue();
     }
     
     @Override

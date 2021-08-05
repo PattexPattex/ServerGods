@@ -11,7 +11,6 @@ import com.pattexpattex.servergods.commands.status.MaintenanceCommand;
 import com.pattexpattex.servergods.commands.status.OfflineCommand;
 import com.pattexpattex.servergods.commands.status.OnlineCommand;
 import com.pattexpattex.servergods.commands.status.RestartCommand;
-import com.pattexpattex.servergods.BotCommand;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
