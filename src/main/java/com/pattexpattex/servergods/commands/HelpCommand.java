@@ -20,11 +20,11 @@ public class HelpCommand implements BotCommand{
 	@Override
 	public void run(GuildMessageReceivedEvent event, String[] args) {
 		EmbedBuilder eb=new EmbedBuilder();
-		eb.setFooter("Powered by Server Gods.", Main.pfp)
+		eb.setFooter("Powered by Server Gods.", Main.PFP)
 		.setTimestamp(OffsetDateTime.now())
-		.setColor(Main.color)
+		.setColor(Main.COLOR)
 		.setTitle("Help page")
-		.setThumbnail(Main.pfp);
+		.setThumbnail(Main.PFP);
 		commands.forEach((name,cmd)->eb.addField(name, cmd.getHelp(), false));
 		event.getMessage().reply(eb.build()).queue();
 	}

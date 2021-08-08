@@ -3,23 +3,33 @@ package com.pattexpattex.servergods.commands.status;
 import com.pattexpattex.servergods.BotCommand;
 import com.pattexpattex.servergods.util.MessageUtils;
 
+import net.dv8tion.jda.api.entities.Member;
+import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
-//import net.dv8tion.jda.api.entities.VoiceChannel;
 
 public class RestartCommand implements BotCommand {
 
     @Override
     public void run(GuildMessageReceivedEvent event, String[] args) {
-        //VoiceChannel voiceChannel = event.getGuild.getVoiceChannelById("840836187815280640");
-        Role player = event.getGuild().getRoleById("819604897363918949");
-        TextChannel textChannel = event.getGuild().getTextChannelById("819579501327417365");
+        Message message = event.getMessage();
+        Role player = event.getGuild().getRolesByName("Player", true).get(0);
+        TextChannel textChannel = event.getGuild().getTextChannelsByName("📣-announcements", true).get(0);
+        Member owner = event.getGuild().getOwner();
+        Member author = event.getMember();
 
-        MessageUtils.rolePing(player, textChannel);
-        //voiceChannel.getManager().setName("🟠 Restarting...").queue();
-        textChannel.sendMessage(MessageUtils.defaultEmbed("Server Status", "The server is **:orange_circle: Restarting**, it should be back soon:tm:.", false).build()).queue();
-        event.getMessage().reply(MessageUtils.defaultEmbed(null, "Notified that the server is **:orange_circle: Restarting**", false).build()).queue();
+        if (author != owner) { //Checks if the command executor is the owner
+            message.reply(MessageUtils.ownerOnlyCommandEmbed().build()).queue();
+        } else {
+            MessageUtils.rolePing(player, textChannel);
+
+            textChannel.sendMessage(MessageUtils.defaultEmbed("Server Status"
+            , "The server is **:orange_circle: Restarting**, it should be back soon:tm:.", false).build()).queue();
+
+            message.reply(MessageUtils.defaultEmbed(null
+            , ":bell: Notified that the server is **:orange_circle: Restarting**", false).build()).queue();
+        }
     }
 
     @Override

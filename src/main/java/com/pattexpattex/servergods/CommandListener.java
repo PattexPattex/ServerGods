@@ -1,16 +1,13 @@
 package com.pattexpattex.servergods;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import com.pattexpattex.servergods.commands.*;
-import com.pattexpattex.servergods.commands.status.MaintenanceCommand;
-import com.pattexpattex.servergods.commands.status.OfflineCommand;
-import com.pattexpattex.servergods.commands.status.OnlineCommand;
-import com.pattexpattex.servergods.commands.status.RestartCommand;
+import com.pattexpattex.servergods.commands.status.*;
+import com.pattexpattex.servergods.util.MessageUtils;
 
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -26,11 +23,14 @@ public class CommandListener extends ListenerAdapter {
 	public CommandListener(String prefix) {
 		this.prefix = prefix;
 		commands.put("ping", new PingCommand());
-		commands.put("help", new HelpCommand(Collections.unmodifiableMap(commands)));
+		commands.put("help", new HelpCommand(commands));
 		commands.put("offline", new OfflineCommand());
 		commands.put("online", new OnlineCommand());
 		commands.put("maintenance", new MaintenanceCommand());
 		commands.put("restarting", new RestartCommand());
+		commands.put("player", new PlayerCommand());
+		commands.put("stop", new StopCommand());
+		commands.put("warn", new WarnCommand());
 	}
 	
 	@Override
@@ -48,7 +48,7 @@ public class CommandListener extends ListenerAdapter {
 		String commandName=split[0];
 		BotCommand cmd = commands.get(commandName);
 		if(cmd==null) {
-			msg.reply("Command not found").queue();
+			msg.reply(MessageUtils.defaultEmbed(null, ":noo: Command not found!", false).build()).queue();
 		}else {
 			String[] args=Stream.of(split).skip(1).toArray(String[]::new);
 			cmd.run(event, args);

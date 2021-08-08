@@ -8,7 +8,7 @@ public class PingCommand implements BotCommand{
 
 	@Override
 	public void run(GuildMessageReceivedEvent event, String[] args) {
-		event.getMessage().reply("My ping: "+event.getJDA().getGatewayPing()).queue();
+		event.getMessage().reply(":clock8: My ping: "+event.getJDA().getGatewayPing()).queue();
 	}
 
 	@Override
