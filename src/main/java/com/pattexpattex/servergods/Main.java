@@ -10,13 +10,6 @@ import java.nio.charset.StandardCharsets;
 import javax.security.auth.login.LoginException;
 
 import com.pattexpattex.servergods.events.MemberJoinEvent;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -31,9 +24,10 @@ public class Main {
 	public static final Color COLOR = new Color(84, 130, 53);
 	public static final String PFP = 
 		"https://cdn.discordapp.com/avatars/840904349478682624/b74c2c359604034628c226d26b6f1e14.webp?size=256";
-	public static final String OWNER_ID = "714406547161350155";
 	
-	public static void main(String[] args) throws LoginException, IllegalArgumentException {
+	public static void main(String[] args) {
+
+		//Start the JDA client
 		try {
 			JSONObject json=readConfig();
 			String token = json.getString("token");
