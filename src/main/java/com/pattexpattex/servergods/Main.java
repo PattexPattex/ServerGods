@@ -1,6 +1,7 @@
 package com.pattexpattex.servergods;
 
 import com.pattexpattex.servergods.events.MemberJoinEvent;
+import com.pattexpattex.servergods.util.Config;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -33,28 +34,25 @@ public class Main {
 
 		//Start the JDA client
 		try {
-			JSONObject json=readConfig();
-			String token = json.getString("token");
-			String prefix = json.getString("prefix");
+			Config config = new Config();
 
-			JDA jda = JDABuilder.createDefault(token)
+			JDA jda = JDABuilder.createDefault(config.getToken())
 				.enableIntents(GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
-				.addEventListeners(new CommandListener(prefix), new MemberJoinEvent())
+				.addEventListeners(new CommandListener(config.getPrefix()), new MemberJoinEvent())
 				.disableCache(CacheFlag.VOICE_STATE, CacheFlag.EMOTE)
-				.setActivity(Activity.playing("Server Gods 1.2.0-SNAPSHOT"))
+				.setActivity(config.getActivity())
 				.setStatus(OnlineStatus.IDLE)
 				.build();
 
-		} catch (IOException e) { LOG.error("Cannot read config.json",e); }
-		  catch (JSONException e) { LOG.error("The file config.json does not contain the necessary elements 'token' and 'prefix'."); }
-		  catch (LoginException e) { LOG.error("Cannot login - make sure the token is correct"); }
+		} catch (LoginException e) { LOG.error("Cannot login - make sure the token is correct"); }
 		  catch (IllegalArgumentException e) { LOG.error("No token was entered."); }
+		  catch (IOException e) { LOG.error("The file config.json does not contain the necessary elements."); }
 	}
 	
-	private static JSONObject readConfig() throws IOException {
+	/*private static JSONObject readConfig() throws IOException {
 		try(BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream("config.json"),StandardCharsets.UTF_8))){
 			JSONTokener tokener=new JSONTokener(br);
 			return new JSONObject(tokener);
-		} 
-	}	
+		}
+	}*/
 }

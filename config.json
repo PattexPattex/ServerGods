@@ -1,4 +1,6 @@
 {
 	"token": "token goes here",
-	"prefix": "$"
+	"prefix": "$",
+	"activity": "Server Console",
+	"activityType": "WATCHING"
 }

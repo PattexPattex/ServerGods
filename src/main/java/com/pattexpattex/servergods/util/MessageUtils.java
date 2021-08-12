@@ -25,7 +25,7 @@ public class MessageUtils {
         if (title != null) { //Checks if the title parameter is null, if not, adds the parameter to the embed
             eb.setTitle(title);
         }
-        if (thumbnail == true) { //Checks if it should add a thumbnail
+        if (thumbnail) { //Checks if it should add a thumbnail
             eb.setThumbnail(Main.PFP); //The bot's profile pic
         }
 
@@ -33,9 +33,8 @@ public class MessageUtils {
     }
 
     public static EmbedBuilder ownerOnlyCommandEmbed() {
-        EmbedBuilder eb = defaultEmbed("WHOA DUDE"
+        return defaultEmbed("WHOA DUDE"
         , ":stop_sign: Yo, I see that you are trying to use an **OWNER ONLY** command, chill bro!", false);
-        return eb;
     }
 
     public static EmbedBuilder welcomeEmbed(Member member) { //Creates and returns the welcome embed
@@ -49,6 +48,10 @@ public class MessageUtils {
         eb.setTimestamp(OffsetDateTime.now());
 
         return eb;
+    }
+
+    public static void deleteMessage(Message message) {
+        message.delete().queueAfter(5, TimeUnit.SECONDS);
     }
 
     public static void userPing(Member member, TextChannel channel) { //Pings the specified user in the specified channel
