@@ -25,10 +25,10 @@ public class RestartCommand implements BotCommand {
             MessageUtils.rolePing(player, textChannel);
 
             textChannel.sendMessage(MessageUtils.defaultEmbed("Server Status"
-            , "The server is **:orange_circle: Restarting**, it should be back soon:tm:.", false).build()).queue();
+            , "The server is **:orange_circle: Restarting**, it should be back soon:tm:.", null, null).build()).queue();
 
             message.reply(MessageUtils.defaultEmbed(null
-            , ":bell: Notified that the server is **:orange_circle: Restarting**", false).build()).queue();
+            , ":bell: Notified that the server is **:orange_circle: Restarting**", null, null).build()).queue();
         }
     }
 

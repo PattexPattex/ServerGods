@@ -28,10 +28,10 @@ public class OfflineCommand implements BotCommand {
             voiceChannel.getManager().setName("🔴 Offline").queue();
 
             message.reply(MessageUtils.defaultEmbed(null
-            , ":pencil2: Changed the status name to **:red_circle: Offline**", false).build()).queue();
+            , ":pencil2: Changed the status name to **:red_circle: Offline**", null, null).build()).queue();
 
             textChannel.sendMessage(MessageUtils.defaultEmbed("Server Status"
-            , "The server is **:red_circle: Offline**. <:sadCatto:853560306671419434>", false).build()).queue();
+            , "The server is **:red_circle: Offline**. <:sadCatto:853560306671419434>", null, null).build()).queue();
         }
     }
     

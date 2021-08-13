@@ -23,6 +23,9 @@ public class PlayerCommand implements BotCommand {
         Member author = event.getMember();
 
         if (author != owner) { //Checks if the command executor is the owner
+            Message reply = message.reply(MessageUtils.ownerOnlyCommandEmbed().build()).complete();
+            MessageUtils.deleteMessage(reply, 30L);
+            MessageUtils.deleteMessage(message, 30L);
         } else {
             Member mentionedMember = message.getMentionedMembers().get(0); //Gets the mentioned members
 //Assigns the roles to them
@@ -30,8 +33,10 @@ public class PlayerCommand implements BotCommand {
             event.getGuild().addRoleToMember(mentionedMember, playerRole).queue();
             event.getGuild().addRoleToMember(mentionedMember, djRole).queue();
             
-            message.reply(MessageUtils.defaultEmbed(null
-            , ":arrow_double_up: Promoted the mentioned " + memberRole.getAsMention() + " to " + playerRole.getAsMention() + "!", false).build()).queue();
+            Message reply = message.reply(MessageUtils.defaultEmbed(null, ":arrow_double_up: Promoted the mentioned " + memberRole.getAsMention() + " to " + playerRole.getAsMention() + "!", mentionedMember.getUser().getAvatarUrl(), null).build()).complete();
+
+            MessageUtils.deleteMessage(message, 30L);
+            MessageUtils.deleteMessage(reply, 30L);
         }
 
     }

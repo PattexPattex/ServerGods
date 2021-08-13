@@ -28,10 +28,10 @@ public class MaintenanceCommand implements BotCommand {
             voiceChannel.getManager().setName("🟠 Maintenance").queue();
 
             textChannel.sendMessage(MessageUtils.defaultEmbed("Server Status"
-            , ":tools: The server is now on **:orange_circle: Maintenance**, it should be back soon:tm:.", false).build()).queue();
+            , ":tools: The server is now on **:orange_circle: Maintenance**, it should be back soon:tm:.", null, null).build()).queue();
 
             message.reply(MessageUtils.defaultEmbed(null
-            , ":pencil2: Changed the status name to **:orange_circle: Maintenance**", false).build()).queue();
+            , ":pencil2: Changed the status name to **:orange_circle: Maintenance**", null, null).build()).queue();
         }   
     }
     

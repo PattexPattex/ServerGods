@@ -26,6 +26,7 @@ public class Main {
 
 	private static final Logger LOG=LoggerFactory.getLogger(Main.class);
 
+	public static final String INVITE = "https://discord.gg/rY9zBZv86b";
 	public static final Color COLOR = new Color(84, 130, 53);
 	public static final String PFP = 
 		"https://cdn.discordapp.com/avatars/840904349478682624/b74c2c359604034628c226d26b6f1e14.webp?size=256";
@@ -48,11 +49,4 @@ public class Main {
 		  catch (IllegalArgumentException e) { LOG.error("No token was entered."); }
 		  catch (IOException e) { LOG.error("The file config.json does not contain the necessary elements."); }
 	}
-	
-	/*private static JSONObject readConfig() throws IOException {
-		try(BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream("config.json"),StandardCharsets.UTF_8))){
-			JSONTokener tokener=new JSONTokener(br);
-			return new JSONObject(tokener);
-		}
-	}*/
 }

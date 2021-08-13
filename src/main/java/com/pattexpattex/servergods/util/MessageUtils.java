@@ -1,6 +1,7 @@
 package com.pattexpattex.servergods.util;
 
 import java.time.OffsetDateTime;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import com.pattexpattex.servergods.Main;
@@ -11,22 +12,33 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.entities.TextChannel;
 
+import javax.annotation.Nullable;
+
 public class MessageUtils {
     
-    public static EmbedBuilder defaultEmbed(String title, String message, Boolean thumbnail) { //Creates the default embed, used everywhere
+    public static EmbedBuilder defaultEmbed(String title, String message, String thumbnail, String image) { //Creates the default embed, used everywhere
         EmbedBuilder eb = new EmbedBuilder();
 
         eb.setColor(Main.COLOR)
         .setFooter("Powered by Server Gods.", Main.PFP)
         .setTimestamp(OffsetDateTime.now());
 
-        eb.setDescription(message);
+        if (message != null) { //Checks if it should add a description
+            eb.setDescription(message);
+        }
         
         if (title != null) { //Checks if the title parameter is null, if not, adds the parameter to the embed
             eb.setTitle(title);
         }
-        if (thumbnail) { //Checks if it should add a thumbnail
+
+        if (Objects.equals(thumbnail, "DEFAULT")) { //Checks if it should add a thumbnail
             eb.setThumbnail(Main.PFP); //The bot's profile pic
+        } else if (thumbnail != null) {
+            eb.setThumbnail(thumbnail);
+        }
+
+        if (image != null) {
+            eb.setImage(image);
         }
 
         return eb;
@@ -34,7 +46,7 @@ public class MessageUtils {
 
     public static EmbedBuilder ownerOnlyCommandEmbed() {
         return defaultEmbed("WHOA DUDE"
-        , ":stop_sign: Yo, I see that you are trying to use an **OWNER ONLY** command, chill bro!", false);
+        , ":stop_sign: Yo, I see that you are trying to use an **OWNER ONLY** command, chill bro!", null, null);
     }
 
     public static EmbedBuilder welcomeEmbed(Member member) { //Creates and returns the welcome embed
@@ -50,8 +62,10 @@ public class MessageUtils {
         return eb;
     }
 
-    public static void deleteMessage(Message message) {
-        message.delete().queueAfter(5, TimeUnit.SECONDS);
+    public static void deleteMessage(Message message, Long deleteAfterSeconds) {
+        if (message != null) {
+            message.delete().queueAfter(deleteAfterSeconds, TimeUnit.SECONDS);
+        }
     }
 
     public static void userPing(Member member, TextChannel channel) { //Pings the specified user in the specified channel
@@ -64,7 +78,7 @@ public class MessageUtils {
         m.delete().queueAfter(5, TimeUnit.SECONDS);
     }
 
-    public static void serverPing(TextChannel channel) { //Pings the entire server
+    public static void serverPing(TextChannel channel) { //Pings the entire server in the specified channel
         String guildPing = channel.getGuild().getId();
         Message m = channel.sendMessage("<:woke:853319377200611329> " + "<@&" + guildPing + ">").complete();
         m.delete().queueAfter(5, TimeUnit.SECONDS);

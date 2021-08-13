@@ -28,10 +28,10 @@ public class OnlineCommand implements BotCommand {
             voiceChannel.getManager().setName("🟢 Online").queue();
 
             message.reply(MessageUtils.defaultEmbed(null
-            , ":pencil2: Changed the status name to **:green_circle: Online**", false).build()).queue();
+            , ":pencil2: Changed the status name to **:green_circle: Online**", null, null).build()).queue();
 
             textChannel.sendMessage(MessageUtils.defaultEmbed("Server Status"
-            , "The server is back **:green_circle: Online**! :partying_face:", false).build()).queue();
+            , "The server is back **:green_circle: Online**! :partying_face:", null, null).build()).queue();
         }
     }
     
