@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.pattexpattex.servergods</groupId>
 	<artifactId>servergods</artifactId>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 	<repositories>
 		<repository>
 			<id>dv8tion</id>

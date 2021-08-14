@@ -6,7 +6,10 @@ import java.util.Map;
 import com.pattexpattex.servergods.BotCommand;
 import com.pattexpattex.servergods.Main;
 
+import com.pattexpattex.servergods.util.MessageUtils;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public class HelpCommand implements BotCommand{
@@ -19,14 +22,18 @@ public class HelpCommand implements BotCommand{
 	
 	@Override
 	public void run(GuildMessageReceivedEvent event, String[] args) {
-		EmbedBuilder eb=new EmbedBuilder();
-		eb.setFooter("Powered by Server Gods.", Main.PFP)
-		.setTimestamp(OffsetDateTime.now())
-		.setColor(Main.COLOR)
-		.setTitle("Help page")
-		.setThumbnail(Main.PFP);
-		commands.forEach((name,cmd)->eb.addField(name, cmd.getHelp(), false));
-		event.getMessage().reply(eb.build()).queue();
+		User author = event.getAuthor();
+		Message message = event.getMessage();
+
+		EmbedBuilder heb = MessageUtils.defaultEmbed("Help page", null, "DEFAULT", null);
+		commands.forEach((name,cmd) -> heb.addField(name, cmd.getHelp(), false));
+
+		author.openPrivateChannel().queue((channel) -> channel.sendMessage(heb.build()).queue());
+		Message reply = message.reply(MessageUtils.defaultEmbed("Help", ":mailbox_with_mail: Sent you the commands!", null, null).build()).complete();
+
+		MessageUtils.deleteMessage(message, 30L);
+		MessageUtils.deleteMessage(reply, 30L);
+
 	}
 
 	@Override

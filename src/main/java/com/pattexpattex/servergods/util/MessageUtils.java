@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
 
 public class MessageUtils {
     
-    public static EmbedBuilder defaultEmbed(String title, String message, String thumbnail, String image) { //Creates the default embed, used everywhere
+    public static EmbedBuilder defaultEmbed(@Nullable String title, @Nullable String message, @Nullable String thumbnail, @Nullable String image) { //Creates the default embed, used everywhere
         EmbedBuilder eb = new EmbedBuilder();
 
         eb.setColor(Main.COLOR)
