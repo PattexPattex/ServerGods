@@ -29,16 +29,14 @@ public class HelpCommand implements BotCommand{
 		commands.forEach((name,cmd) -> heb.addField(name, cmd.getHelp(), false));
 
 		author.openPrivateChannel().queue((channel) -> channel.sendMessage(heb.build()).queue());
-		Message reply = message.reply(MessageUtils.defaultEmbed("Help", ":mailbox_with_mail: Sent you the commands!", null, null).build()).complete();
+		Message reply = message.reply(MessageUtils.defaultEmbed("Help page", ":mailbox_with_mail: Sent you the commands!", null, null).build()).complete();
 
 		MessageUtils.deleteMessage(message, 30L);
 		MessageUtils.deleteMessage(reply, 30L);
-
 	}
 
 	@Override
 	public String getHelp() {
 		return "Displays a list of all commands and their help messages";
 	}
-
 }

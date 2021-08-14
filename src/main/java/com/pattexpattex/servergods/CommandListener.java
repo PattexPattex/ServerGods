@@ -34,6 +34,7 @@ public class CommandListener extends ListenerAdapter {
 		commands.put("meme", new MemeCommand());
 		commands.put("archive", new ArchiveCommand());
 		commands.put("invite", new InviteCommand());
+		commands.put("shuffle", new ShuffleCommand());
 	}
 	
 	@Override

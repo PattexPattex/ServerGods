@@ -19,10 +19,10 @@ public class StopCommand implements BotCommand {
         if (author != owner) { //Checks if the command executor is the owner
             event.getMessage().reply(MessageUtils.ownerOnlyCommandEmbed().build()).queue();
         } else {
-            event.getMessage().reply(eb.build()).queue();
-
-            event.getJDA().shutdownNow();
-            System.exit(5); //Successful exit
+            event.getMessage().reply(eb.build()).queue((success) -> {
+                event.getJDA().shutdownNow();
+                System.exit(5); //Successful exit
+            });
         }
     }
 
