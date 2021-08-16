@@ -13,7 +13,7 @@ public class ArchiveCommand implements BotCommand {
     @Override
     public void run(GuildMessageReceivedEvent event, String[] args) {
         Map<String, String> archive = new HashMap<>();
-        archive.put("S1 WDL", "https://drive.google.com/file/d/11dGhytiuPoLsfe0yXSzThUka_ZOy6wBb/view?usp=sharing");
+        archive.put("S1 WDL", "https://drive.google.com/file/d/1zunqZqCcMR8KQy3GHb7NK_aq6Ea4dwbC/view?usp=sharing");
         archive.put("S1 Cinematic", "https://www.youtube.com/watch?v=zCFvghvV-j8");
         archive.put("First Cinematic", "https://www.youtube.com/watch?v=SY4bs4DbldQ");
         archive.put("AlalalPack 1", "https://cdn.discordapp.com/attachments/819579501327417365/851443276548145172/AlalalPack-1.zip");
