@@ -9,6 +9,7 @@ import com.pattexpattex.servergods.commands.*;
 import com.pattexpattex.servergods.commands.status.*;
 import com.pattexpattex.servergods.util.MessageUtils;
 
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -30,11 +31,13 @@ public class CommandListener extends ListenerAdapter {
 		commands.put("restarting", new RestartCommand());
 		commands.put("player", new PlayerCommand());
 		commands.put("stop", new StopCommand());
-		commands.put("warn", new WarnCommand());
+		commands.put("mcwarn", new McWarnCommand());
 		commands.put("meme", new MemeCommand());
 		commands.put("archive", new ArchiveCommand());
 		commands.put("invite", new InviteCommand());
 		commands.put("shuffle", new ShuffleCommand());
+		commands.put("mcban", new McBanCommand());
+		commands.put("ban", new BanCommand());
 	}
 	
 	@Override
