@@ -2,5 +2,6 @@
 	"token": "token goes here",
 	"prefix": "$",
 	"activity": "Server Console",
-	"activityType": "WATCHING"
+	"activityType": "WATCHING",
+	"ownerId": "unimplemented yet"
 }

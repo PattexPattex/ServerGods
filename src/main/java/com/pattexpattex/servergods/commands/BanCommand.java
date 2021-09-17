@@ -19,17 +19,24 @@ public class BanCommand implements BotCommand {
             String reason;
             String bannedMemberName;
 
-            if (author != owner) { //Checks if the command executor is the owner
+            if (author != owner) {
                 message.reply(MessageUtils.ownerOnlyCommandEmbed().build()).queue();
             } else {
                 bannedMemberName = bannedMember.getEffectiveName();
                 reason = message.getContentDisplay().replace("$ban ", "").replace("@" + bannedMemberName, "");
 
-                bannedMember.ban(0, reason).queue((success) -> {
-                    EmbedBuilder eb = MessageUtils.defaultEmbed("um ok your da boss", "<:catLoading:853319548874129488> Successfully banned **" + bannedMemberName + "**! What now?", null, null);
-                    message.reply(eb.build()).queue();
-                });
+                message.reply(MessageUtils.defaultEmbed("Banned!", "<:catLoading:853319548874129488> Successfully banned **" + bannedMember.getAsMention() + "**! What now?", null, null).build()).queue();
 
+                /*bannedMember.getUser().openPrivateChannel().complete().sendMessage(MessageUtils.defaultEmbed("Pomembno obvestilo", "Člani Alalal SMP-ja in tretje osebe so se odločile, da tebe, **" +
+                        bannedMemberName + "** banamo zaradi:\n**- Greed/Cheezanje sistema**\n**- Neupoštevanje pravil**\n**- Griefanje** [Alalal SMP 1]\n**- Predstavlja neposredno grožnjo zdravju serverja**\n" +
+                        "**-** (Občasne) **neverjetne količine laga**\n\nTa ban je končen in veljaven za nedoločen čas, revoke ni možen. *Možne alternative so t. i. Matija SMP, SSP ali nekaj tretjega.* Prošnje za vrnitev bodo bile ignorirane.\n\n- **Server Gods**", null, null).build()).queue();
+
+                //owner.getUser().openPrivateChannel().complete().sendMessage(MessageUtils.defaultEmbed("Pomembno obvestilo", "Člani Alalal SMP-ja in tretje osebe so se odločile, da tebe, **" +
+                        bannedMemberName + "** banamo zaradi:\n**- Greed/Cheezanje sistema**\n**- Neupoštevanje pravil**\n**- Griefanje** [Alalal SMP 1]\n**- Predstavlja neposredno grožnjo zdravju serverja**\n" +
+                        "**-** (Občasne) **neverjetne količine laga**\n\nTa ban je končen in veljaven za nedoločen čas, revoke ni možen. *Možne alternative so t. i. Matija SMP, SSP ali nekaj tretjega.* Prošnje za vrnitev bodo bile ignorirane.\n\n- **Server Gods**", null, null).build()).queue();
+                 */
+
+                bannedMember.ban(0, reason).queue();
             }
         }
     }

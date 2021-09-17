@@ -22,6 +22,7 @@ public class Config {
     String prefix = json.getString("prefix");
     String activity = json.getString("activity");
     String activityType = json.getString("activityType");
+    String ownerId = json.getString("ownerId");
 
     private JSONObject readConfig() throws IOException {
         try(BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream("config.json"), StandardCharsets.UTF_8))){
@@ -37,6 +38,12 @@ public class Config {
     public String getPrefix() {
         return prefix;
     }
+
+    //Not implemented yet
+    public String getOwnerId() {
+        return ownerId;
+    }
+
     public Activity getActivity() {
         Activity ac;
 
