@@ -1,6 +1,7 @@
 package com.pattexpattex.servergods.commands.status;
 
-import com.pattexpattex.servergods.BotCommand;
+import com.pattexpattex.servergods.config.Config;
+import com.pattexpattex.servergods.util.BotCommand;
 import com.pattexpattex.servergods.util.MessageUtils;
 
 import net.dv8tion.jda.api.entities.Member;
@@ -39,5 +40,10 @@ public class OfflineCommand implements BotCommand {
     public String getHelp() {
         return "Sets the status channel to offline";
     }
-        
+
+    @Override
+    public Object isEnabled() {
+        return CONFIG.getConfigValue(Config.SmpConfig.SMP_ENABLE);
+    }
+
 }
