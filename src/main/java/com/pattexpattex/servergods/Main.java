@@ -1,52 +1,44 @@
 package com.pattexpattex.servergods;
 
+import com.pattexpattex.servergods.config.Config;
+import com.pattexpattex.servergods.config.MemesConfig;
 import com.pattexpattex.servergods.events.MemberJoinEvent;
-import com.pattexpattex.servergods.util.Config;
+import com.pattexpattex.servergods.util.MessageUtils;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
-import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.cache.CacheFlag;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.security.auth.login.LoginException;
-import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
+import java.awt.Color;
 
 public class Main {
 
-	private static final Logger LOG=LoggerFactory.getLogger(Main.class);
+	public static final Logger LOG = LoggerFactory.getLogger(Main.class);
+	public static Config CONFIG;
+	public static MemesConfig MEMES_CONFIG;
+	public static JDA jda;
 
-	public static final String INVITE = "https://discord.gg/rY9zBZv86b";
-	public static final Color COLOR = new Color(84, 130, 53);
-	public static final String PFP = 
-		"https://cdn.discordapp.com/avatars/840904349478682624/b74c2c359604034628c226d26b6f1e14.webp?size=256";
+	public static Color COLOR = new Color(0, 90, 112);
+	public static final Color ERROR_COLOR = new Color(250, 75, 75);
 	
 	public static void main(String[] args) {
 
 		//Start the JDA client
 		try {
-			Config config = new Config();
+			CONFIG = new Config();
+			MEMES_CONFIG = new MemesConfig();
 
-			JDA jda = JDABuilder.createDefault(config.getToken())
+		jda = JDABuilder.createDefault((String) CONFIG.getConfigValue(Config.BasicConfig.TOKEN)) //Bot token
 				.enableIntents(GatewayIntent.GUILD_MESSAGES, GatewayIntent.GUILD_MEMBERS)
-				.addEventListeners(new CommandListener(config.getPrefix()), new MemberJoinEvent())
+				.addEventListeners(new EventListener((String) CONFIG.getConfigValue(Config.BasicConfig.PREFIX)), //Bot prefix
+						new MemberJoinEvent())
 				.disableCache(CacheFlag.VOICE_STATE, CacheFlag.EMOTE)
-				.setActivity(config.getActivity())
+				.setActivity(CONFIG.getActivity())
 				.setStatus(OnlineStatus.IDLE)
 				.build();
 
-		} catch (LoginException e) { LOG.error("Cannot login - make sure the token is correct"); }
-		  catch (IllegalArgumentException e) { LOG.error("No token was entered."); }
-		  catch (IOException e) { LOG.error("The file config.json does not contain the necessary elements."); }
+		} catch (Exception e) {LOG.error(null, e);}
 	}
 }

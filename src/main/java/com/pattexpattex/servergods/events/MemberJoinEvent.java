@@ -1,5 +1,7 @@
 package com.pattexpattex.servergods.events;
 
+import com.pattexpattex.servergods.Main;
+import com.pattexpattex.servergods.config.Config;
 import com.pattexpattex.servergods.util.MessageUtils;
 
 import net.dv8tion.jda.api.entities.Member;
@@ -10,11 +12,13 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class MemberJoinEvent extends ListenerAdapter {
 
+    private Config CONFIG = Main.CONFIG;
+
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
         Member newMember = event.getMember();
-        Role role = event.getGuild().getRolesByName("Member", true).get(0);
-        TextChannel channel = event.getGuild().getTextChannelsByName("🎉-welcome", true).get(0);
+        Role role = event.getGuild().getRoleById((long) CONFIG.getConfigValue(Config.GenericRoles.MEMBER));
+        TextChannel channel = event.getGuild().getTextChannelById((long) CONFIG.getConfigValue(Config.BasicConfig.WELCOME_CHANNEL));
 
         MessageUtils.userPing(newMember, channel); //Pings the new user
         channel.sendMessage(MessageUtils.welcomeEmbed(newMember).build()).queue(); //Send the embed

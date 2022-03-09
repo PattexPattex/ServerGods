@@ -1,7 +1,42 @@
 {
-	"token": "token goes here",
-	"prefix": "$",
-	"activity": "Server Console",
-	"activityType": "WATCHING",
-	"ownerId": "unimplemented yet"
+	"basic_config": {
+		"token": "OTI5ODI2NTk1OTUzMzM2NDQx.Yds-fw.bMy4W8bTE9QnDKWYtRUVdA_5sZ0",
+		"prefix": "t!",
+		"bot_pfp": "https://cdn.discordapp.com/avatars/929826595953336441/bb95c76a5b925a6ac7cb944e3120f20c.webp?size=32",
+		"activity": "Debug Console",
+		"activity_type": "WATCHING",
+		"bot_owner": "714406547161350155",
+		"welcome_channel": "819581122974974002",
+		"default_guild": "819571455846514718"
+	},
+
+	"generic_roles": {
+		"member": "819606490658373682",
+		"dj": "819612561250713635",
+		"lgbt": "871993618213265470",
+		"muted": "819606490658373682",
+		"cc": "819604813339557909",
+		"yt": "855890972079554560",
+		"ttv": "855890772896776223",
+		"mc": "930394959524270100",
+		"gta": "930395229213835325"
+	},
+
+	"smp_config": {
+		"smp_role": "819604897363918949",
+		"smp_banned_role": "873955683660345405",
+		"smp_1_warn_role": "847473900811059280",
+		"smp_2_warn_role": "847474082156904479",
+		"smp_enable": false
+	},
+
+	"enable_command": {
+		"meme": false,
+		"shuffle": false,
+		"grant": false,
+		"archive": false,
+		"ban": false,
+		"kick": false,
+		"mute": true
+	}
 }

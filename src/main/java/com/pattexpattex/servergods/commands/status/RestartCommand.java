@@ -1,6 +1,7 @@
 package com.pattexpattex.servergods.commands.status;
 
-import com.pattexpattex.servergods.BotCommand;
+import com.pattexpattex.servergods.config.Config;
+import com.pattexpattex.servergods.util.BotCommand;
 import com.pattexpattex.servergods.util.MessageUtils;
 
 import net.dv8tion.jda.api.entities.Member;
@@ -35,5 +36,10 @@ public class RestartCommand implements BotCommand {
     @Override
     public String getHelp() {
         return "Notifies the discord that the server is restarting";
+    }
+
+    @Override
+    public Object isEnabled() {
+        return CONFIG.getConfigValue(Config.SmpConfig.SMP_ENABLE);
     }
 }
